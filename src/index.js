@@ -1,23 +1,37 @@
 import makeHeader from './header'
 import makeHome from './home'
 import makeMenu from './menu'
+import makediv from './makediv'
+import makeContactUs from './contact';
 function createWebsite(){
-    const content=document.querySelector("#content");
-    content.appendChild(makeHeader());
-    const pageDiv=document.createElement("div","pageDiv");
-    pageDiv.appendChild(makeHome());
-    content.appendChild(pageDiv);
+    initialContent();
     // add event listeners for buttons
-    const home=document.querySelector("#home");
-    const menu=document.querySelector("#menu");
-    const contact=document.querySelector("#contact");
-    const location=document.querySelector("#location");
-    let menuOptions=[home,menu,contact,location];
-    //
-    for(let i=0;i<4;i++){
+    const menuNames=["home","menu","contact","location"];
+    addEventListeners(menuNames);
+
+    
+    
+   
+
+}
+function addEventListeners(names){
+    const pageDiv=document.querySelector(".pageDiv");
+    
+    let menuOptions=[];
+    for(let i=0;i<names.length;i++){
+        menuOptions[i]=document.querySelector("#"+names[i]);
         menuOptions[i].addEventListener("click",()=>switchTab(menuOptions[i],pageDiv));
         
     }
+    
+}
+function initialContent()
+{
+    const content=document.querySelector("#content");
+    content.appendChild(makeHeader());
+    const pageDiv=makediv("div","pageDiv");
+    pageDiv.appendChild(makeHome());
+    content.appendChild(pageDiv);
 
 }
 function switchTab(currentPage,content)
@@ -32,6 +46,10 @@ function switchTab(currentPage,content)
     }
     if(pageName=="home"){
         content.appendChild(makeHome())
+    }
+    if(pageName=="contact")
+    {
+        content.appendChild(makeContactUs());
     }
     
 

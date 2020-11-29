@@ -1,6 +1,8 @@
+import makediv from './makediv'
 function makeMenu(){
-    let menu= document.createElement("div");
-    menu.setAttribute("id","home-content");
+    let menu= makediv("div","","menu");
+    let header=makediv("h1","","","Today's Bowl");
+    menu.appendChild(header);
     return menu;
 
 }
